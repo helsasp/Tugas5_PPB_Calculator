@@ -83,11 +83,24 @@ class MainActivity : ComponentActivity() {
                         }
                         Spacer(modifier = Modifier.width(16.dp))
                         Button(
-                            onClick = { result = (num1.toInt() / num2.toInt()).toString() },
+                            onClick = {
+                                val denominator = num2.toIntOrNull()
+                                val numerator = num1.toIntOrNull()
+                                result = if (numerator != null && denominator != null) {
+                                    if (denominator == 0) {
+                                        "Cannot divided by 0"
+                                    } else {
+                                        (numerator / denominator).toString()
+                                    }
+                                } else {
+                                    "Invalid input"
+                                }
+                            },
                             colors = ButtonDefaults.buttonColors(containerColor = babyPurple)
                         ) {
                             Text(text = "Div", color = Color.Black)
                         }
+
                     }
                     Spacer(modifier = Modifier.height(32.dp))
 
